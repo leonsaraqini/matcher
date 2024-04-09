@@ -1,0 +1,26 @@
+h1, h4, p{
+    text-align: center;
+}
+
+table, td, th {
+    border: 1px solid;
+}
+
+p{
+    margin-top: 50px;
+}
+  
+table {
+    border-collapse: collapse;
+}
+
+img{
+    height: 100px;
+    width: 100px;
+}
+
+div{
+    
+    display: flex;
+    justify-content: center;
+}
