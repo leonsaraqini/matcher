@@ -3,7 +3,9 @@ let data;
 let imgTags;
 let score;
 
-window.onload = function(){
+window.onload = start;
+
+function start(){
     initilize();
     
     const tdTags = document.querySelectorAll("#tableGame > tbody > tr > td");
@@ -19,22 +21,27 @@ window.onload = function(){
     }
 }
 
-
 function initilize(){
     imgTags = document.querySelectorAll("#tableGame > tbody > tr > td > img");
     data = JSON.parse(text);
     shuffle(data);
     addBorderToImages();
     score = 0;
+    document.getElementById("score").innerHTML = `Score: 0`;
 }
 
 
-function addBorderToImages(){
-
+function addBorderToImagesAfterSelected(){
     for(let image of imgTags){
         if(image.getAttribute('class') != `closed`){
-            image.src = `pictures/0.jpg`;
-        }  
+            image.src = `pictures/0.jpg`; 
+        }          
+    }
+}
+
+function addBorderToImages(){
+    for(let image of imgTags){
+        image.src = `pictures/0.jpg`;         
     }
 }
 
@@ -48,7 +55,6 @@ function shuffle(array) {
         [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
     }
     
-    return array;
 }
 
 
@@ -76,12 +82,8 @@ function change(td){
             }
         }
 
-        setTimeout(addBorderToImages,600)
+        setTimeout(addBorderToImagesAfterSelected,600)
     }  
-    
-    
-        
-
 }
 
 function checkScore(){

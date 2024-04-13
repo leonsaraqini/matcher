@@ -1,10 +1,14 @@
-h1, h4, p{
+*{
     text-align: center;
+    font-family: "IBM Plex Sans", sans-serif;
+    font-weight: 600;
+    font-style: normal;
 }
 
 table, td, th {
-    border: 1px solid;
+    border: 2px solid;
 }
+
 
 p{
     margin-top: 50px;
@@ -23,4 +27,21 @@ div{
     
     display: flex;
     justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+button{
+    background-color: white;
+    margin-top: 50px;
+    border: 2px solid black;
+    width: 70px;
+    height: 40px;
+    font-size: large;
+    border-radius: 10px;
+}
+
+button:hover{
+    background-color: black;
+    color: white;
 }
