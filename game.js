@@ -103,6 +103,7 @@ function change(td) {
             score++;
             
             if(score == 8){
+                document.getElementById("startButton").style.display = "none";
                 checkScore();
                 return;
             }
@@ -130,7 +131,6 @@ function addBorder(first, second) {
 
 
 async function checkScore() {
-
     clearInterval(x);
     let username = prompt("Enter your name:");
     let finalScore = document.getElementById("score").innerText; 
@@ -142,6 +142,8 @@ async function checkScore() {
     const playersList = await getPlayers(); 
 
     alert(playersList); 
-    
+
+    document.getElementById("startButton").style.display = "block";
+
 }
 

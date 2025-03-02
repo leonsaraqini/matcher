@@ -49,7 +49,7 @@ export async function getPlayers() {
         querySnapshot.forEach(doc => {
             const player = doc.data();
 
-            playersList += `${i++}. ${player.Name} ${player.Score}\n`;
+            playersList += `${i++}. ${player.Name} Score: ${player.Score}\n`;
         });
 
         return playersList;
