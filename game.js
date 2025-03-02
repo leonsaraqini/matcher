@@ -1,3 +1,5 @@
+import { addPlayer, getPlayers } from "./firebase.js";
+
 let text = `[{"class":"1","src":"pictures/1.png"}, 
     {"class":"2","src":"pictures/2.png"},
     {"class":"3","src":"pictures/3.png"},
@@ -18,7 +20,7 @@ let text = `[{"class":"1","src":"pictures/1.png"},
 let data = JSON.parse(text);
 
 let elements = [];
-let score = 0, minutes = 0, seconds = 0, milliseconds = 0;
+let score = 0, minutes = 0,  seconds = 0,  milliseconds = 0 , time = 0;
 let x;
 
 export function init() {
@@ -44,7 +46,7 @@ export function start() {
     score = minutes = seconds = milliseconds = 0;
 
     x = setInterval(() => {
-        milliseconds += 10;
+        
         if (milliseconds >= 1000) {
             milliseconds = 0;
             seconds++;
@@ -58,7 +60,9 @@ export function start() {
         `${String(minutes).padStart(2, '0')}m ` +
         `${String(seconds).padStart(2, '0')}s ` +
         `${String(milliseconds).padStart(3, '0')}ms`;
-
+        
+        milliseconds += 10;
+        time += 10;
     }, 10);
 
     init();
@@ -97,12 +101,18 @@ function change(td) {
 
         if (firstElem.getAttribute('src') == secondElem.getAttribute('src')) {
             score++;
-            setTimeout(checkScore, 2000);
-            return;
+            
+            if(score == 8){
+                checkScore();
+                return;
+            }
+
         } else {
             setTimeout(() => addBorder(firstElem, secondElem), 600);
         }
     }
+
+    
 }
 
 function addBorder(first, second) {
@@ -118,10 +128,20 @@ function addBorder(first, second) {
     second.src = 'pictures/0.jpg';
 }
 
-function checkScore() {
-    if (score === 8) {
-        clearInterval(x);
-        let username = prompt("Enter your name:");
-        alert(`You did it, ${username}!!!`);
-    }
+
+async function checkScore() {
+
+    clearInterval(x);
+    let username = prompt("Enter your name:");
+    let finalScore = document.getElementById("score").innerText; 
+
+    const player = { username, score: finalScore, time };
+
+    await addPlayer(player); 
+
+    const playersList = await getPlayers(); 
+
+    alert(playersList); 
+    
 }
+
