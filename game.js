@@ -69,7 +69,7 @@ export function start() {
 
     document.querySelectorAll("td").forEach(td => {
         td.addEventListener("click", function () {
-            change(this);
+            change(td);
         });
     });
 
@@ -88,12 +88,13 @@ function shuffle(array) {
 
 function change(td) {
     let image = td.firstChild;
+
+    if (!image.src.includes("pictures/0.jpg")) return;
+
     let matchedElement = data.find(element => element.class == image.className);
     image.src = matchedElement.src;
 
     elements.push(image);
-
-    td.removeEventListener("click", change);
 
     if (elements.length == 2) {
         let firstElem = elements.pop();
@@ -117,14 +118,6 @@ function change(td) {
 }
 
 function addBorder(first, second) {
-    first.addEventListener("click", function () {
-        change(this);
-    });
-
-    second.addEventListener("click", function () {
-        change(this);
-    });
-
     first.src = 'pictures/0.jpg';
     second.src = 'pictures/0.jpg';
 }
